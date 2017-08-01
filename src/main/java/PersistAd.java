@@ -36,7 +36,7 @@ public class PersistAd {
         String method = "publish";
         String id = "1";
         List<Object> params = new ArrayList<Object>();
-        params.add("adstream1");
+        params.add("adstream2");
         Long uuid = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         params.add(uuid.toString());
         params.add(hex);
