@@ -21,6 +21,7 @@ public class ServiceResource {
     @GET
     @Timed
     public String createAd(@QueryParam("heading") String heading, @QueryParam("body") String body, @QueryParam("url") String url) {
+        System.out.println("stage1");
         return PersistAd.send(heading, body, url);
         //return new AdText(11l, "Dummy Ad", "Random Ad body", "www.bing.com");
     }
