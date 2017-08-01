@@ -29,7 +29,7 @@ public class ServiceApplication extends Application<ServiceConfiguration> {
         environment.jersey().register(resource);
 
         final String rpcuser ="multichainrpc";
-        final String rpcpassword ="7H3pMurCfk3jJKpUUmcqZDd74KkPzMJQffvXSBZ19v6U";
+        final String rpcpassword ="7ZRmD89NCqKgsaSmLpCUm575j7YEw6qbk9cqcgrCN5S3";
 
         Authenticator.setDefault(new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
