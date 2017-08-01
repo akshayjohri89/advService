@@ -27,9 +27,9 @@ public class PersistAd {
     public static String send(String heading, String body, String url) {
         JSONObject jsonObject = new JSONObject();
         System.out.println("PersistAd:"+heading+","+body+","+url);
-        jsonObject.append("heading", heading);
-        jsonObject.append("body", body);
-        jsonObject.append("url", url);
+        jsonObject.put("heading", heading);
+        jsonObject.put("body", body);
+        jsonObject.put("url", url);
 
         String hex = toHex(jsonObject.toString());
 
