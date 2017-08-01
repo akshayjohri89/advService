@@ -12,7 +12,7 @@ import javax.ws.rs.core.MediaType;
  * Created by akjohri on 7/28/2017.
  */
 @Path("/service")
-@Produces(MediaType.APPLICATION_JSON)
+@Produces(MediaType.TEXT_PLAIN)
 public class ServiceResource {
     public ServiceResource() {
 
@@ -21,7 +21,8 @@ public class ServiceResource {
     @GET
     @Timed
     public String createAd(@QueryParam("heading") String heading, @QueryParam("body") String body, @QueryParam("url") String url) {
-        return PersistAd.send(heading, body, url);
+        //return PersistAd.send(heading, body, url);
+        return "dummy";
         //return new AdText(11l, "Dummy Ad", "Random Ad body", "www.bing.com");
     }
 }
