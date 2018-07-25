@@ -15,6 +15,7 @@ import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
@@ -78,9 +79,10 @@ public class RetrieveAds {
 
 
                 for (int index=0;index<=tokenList.length();index++) {
-                    JSONObject ob = tokenList.getJSONObject(index);
-                    String data = ob.getString("data");
-                    if (data!=null) {
+                    try {
+                        JSONObject ob = tokenList.getJSONObject(index);
+                        String data = ob.getString("data");
+
                         StringBuilder output = new StringBuilder();
                         for (int i = 0; i < data.length(); i+=2) {
                             String str = data.substring(i, i+2);
@@ -90,6 +92,7 @@ public class RetrieveAds {
                         JSONObject returnJson = new JSONObject(output.toString());
                         returnJson.put("key",ob.getString("key"));
                         toReturn.add(returnJson.toString());
+                    } catch (JSONException e) {
                     }
                 }
 //                    toReturn = oj.getString("data");
