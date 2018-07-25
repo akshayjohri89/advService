@@ -11,6 +11,7 @@ import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -24,13 +25,14 @@ import java.util.UUID;
  * Created by akjohri on 8/1/2017.
  */
 public class PersistAd {
-    public static String send(String heading, String body, String url) {
+    public static String send(String id, String heading, String body, String url, String score) {
         JSONObject jsonObject = new JSONObject();
         System.out.println("PersistAd:"+heading+","+body+","+url);
+        jsonObject.put("id", id)
         jsonObject.put("heading", heading);
         jsonObject.put("body", body);
         jsonObject.put("url", url);
-        jsonObject.put("score", 0);
+        jsonObject.put("score", score);
 
         String hex = toHex(jsonObject.toString());
 

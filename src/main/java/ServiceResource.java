@@ -1,6 +1,7 @@
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.base.Optional;
 import net.minidev.json.JSONObject;
+import org.json.JSONException;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -20,9 +21,9 @@ public class ServiceResource {
 
     @GET
     @Timed
-    public String createAd(@QueryParam("heading") String heading, @QueryParam("body") String body, @QueryParam("url") String url) {
+    public String createAd(@QueryParam("AdId") String id, @QueryParam("heading") String heading, @QueryParam("body") String body, @QueryParam("url") String url) {
         System.out.println("stage1");
-        return PersistAd.send(heading, body, url);
+        return PersistAd.send(id, heading, body, url, "0");
         //return new AdText(11l, "Dummy Ad", "Random Ad body", "www.bing.com");
     }
 }
