@@ -28,7 +28,7 @@ public class PersistAd {
     public static String send(String id, String heading, String body, String url, String score) {
         JSONObject jsonObject = new JSONObject();
         System.out.println("PersistAd:"+heading+","+body+","+url);
-        jsonObject.put("id", id)
+        jsonObject.put("id", id);
         jsonObject.put("heading", heading);
         jsonObject.put("body", body);
         jsonObject.put("url", url);
