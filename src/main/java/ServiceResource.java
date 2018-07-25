@@ -39,7 +39,7 @@ public class ServiceResource {
     @GET
     @Timed
     @Path("allAds")
-    public JSONArray getAllAds() {
+    public String getAllAds() {
         return RetrieveAds.send();
     }
 }

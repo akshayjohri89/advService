@@ -31,7 +31,7 @@ import java.util.Random;
 public class RetrieveAds {
 
 
-    public static JSONArray send() {
+    public static String send() {
         String method = "liststreamitems";
         String id = "1";
         List<Object> params = new ArrayList<Object>();
@@ -39,8 +39,8 @@ public class RetrieveAds {
         return invokeRPC(id,method,params,"adchain1");
     }
 
-    public static JSONArray invokeRPC (String id, String method, List<Object> params, String chainName){
-        JSONArray toReturn = new JSONArray();
+    public static String invokeRPC (String id, String method, List<Object> params, String chainName){
+        JSONObject toReturn = new JSONObject();
         HttpClient httpClient = HttpClientBuilder.create().build();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", id);
@@ -92,7 +92,7 @@ public class RetrieveAds {
                         JSONObject returnJson = new JSONObject(output.toString());
                         returnJson.put("key",ob.getString("key"));
 //                        toReturn.add(returnJson.toString());
-                        toReturn.put(index,returnJson);
+                        toReturn.put(ob.getString("key"),returnJson);
                     } catch (JSONException e) {
                     }
                 }
@@ -109,6 +109,6 @@ public class RetrieveAds {
             httpClient.getConnectionManager().shutdown();
         }
 
-        return toReturn;
+        return toReturn.toString();
     }
 }
