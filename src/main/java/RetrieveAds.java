@@ -79,7 +79,7 @@ public class RetrieveAds {
 
 
                 for (int index=0;index<=tokenList.length();index++) {
-                    try {
+//                    try {
                         JSONObject ob = tokenList.getJSONObject(index);
                         String data = ob.getString("data");
 
@@ -92,8 +92,8 @@ public class RetrieveAds {
                         JSONObject returnJson = new JSONObject(output.toString());
                         returnJson.put("key",ob.getString("key"));
                         toReturn.add(returnJson.toString());
-                    } catch (JSONException e) {
-                    }
+//                    } catch (JSONException e) {
+//                    }
                 }
 //                    toReturn = oj.getString("data");
 //                    return output.toString();
