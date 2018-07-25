@@ -80,12 +80,12 @@ public class RetrieveAds {
                 for (int index=0;index<=tokenList.length();index++) {
                     JSONObject ob = tokenList.getJSONObject(index);
                     String data = ob.getString("data");
-                    System.out.println("AllAds:Data:"+data);
                     StringBuilder output = new StringBuilder();
                     for (int i = 0; i < data.length(); i+=2) {
                         String str = data.substring(i, i+2);
                         output.append((char)Integer.parseInt(str, 16));
                     }
+                    System.out.println("AllAds:Data:"+output.toString());
                     JSONObject returnJson = new JSONObject(output.toString());
                     returnJson.put("key",ob.getString("key"));
                     toReturn.add(returnJson.toString());
