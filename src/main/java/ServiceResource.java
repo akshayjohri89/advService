@@ -34,4 +34,11 @@ public class ServiceResource {
         System.out.println("Registering click for "+id);
         return PersistAd.addClick(id);
     }
+
+    @GET
+    @Timed
+    @Path("allAds")
+    public List<String> getAllAds() {
+        return RetrieveAds.send();
+    }
 }
