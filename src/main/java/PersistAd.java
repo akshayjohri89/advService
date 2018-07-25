@@ -30,13 +30,14 @@ public class PersistAd {
         jsonObject.put("heading", heading);
         jsonObject.put("body", body);
         jsonObject.put("url", url);
+        jsonObject.put("score", 0);
 
         String hex = toHex(jsonObject.toString());
 
         String method = "publish";
         String id = "1";
         List<Object> params = new ArrayList<Object>();
-        params.add("adstream2");
+        params.add("adstream1");
         Long uuid = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         params.add(uuid.toString());
         params.add(hex);
@@ -64,13 +65,13 @@ public class PersistAd {
             CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
             credentialsProvider.setCredentials(
                     new AuthScope("localhost", 7174),
-                    new UsernamePasswordCredentials("multichainrpc", "7ZRmD89NCqKgsaSmLpCUm575j7YEw6qbk9cqcgrCN5S3")
+                    new UsernamePasswordCredentials("multichainrpc", "Apb8LDVcPtsCqBeDKBVCtpNRx4GnCPpK2fBJ2eE1S8uK")
             );
 
             StringEntity myEntity = new StringEntity(jsonObject.toString());
 
             HttpPost httpPost = new
-                    HttpPost("http://multichainrpc:7ZRmD89NCqKgsaSmLpCUm575j7YEw6qbk9cqcgrCN5S3@localhost:7174");       //HttpPost("http://multichainrpc:EZikv3MtoKA2yjrG6T7eTkPZMXntwr9k1ft7ja3jLLaA@192.168.1.6:9732");
+                    HttpPost("http://multichainrpc:Apb8LDVcPtsCqBeDKBVCtpNRx4GnCPpK2fBJ2eE1S8uK@localhost:7174");       //HttpPost("http://multichainrpc:EZikv3MtoKA2yjrG6T7eTkPZMXntwr9k1ft7ja3jLLaA@192.168.1.6:9732");
             httpPost.setEntity(myEntity);
 
             HttpResponse httpResponse = httpClient.execute(httpPost);
