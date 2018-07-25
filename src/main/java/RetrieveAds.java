@@ -89,7 +89,7 @@ public class RetrieveAds {
                             output.append((char)Integer.parseInt(str, 16));
                         }
                         System.out.println("AllAds:Data:"+output.toString());
-                        JSONObject returnJson = new JSONObject(output.toString());
+                        JSONObject returnJson = new JSONObject(output.toString().trim());
                         returnJson.put("key",ob.getString("key"));
                         toReturn.add(returnJson.toString());
 //                    } catch (JSONException e) {
