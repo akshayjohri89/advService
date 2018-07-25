@@ -25,6 +25,16 @@ import java.util.UUID;
  * Created by akjohri on 8/1/2017.
  */
 public class PersistAd {
+
+    public static String addClick(String id) {
+        //Retrieve Clicks
+        //Update Clicks
+        System.out.println("addClick: Not doing anything");
+        return "";
+    }
+
+
+
     public static String send(String id, String heading, String body, String url, String score) {
         JSONObject jsonObject = new JSONObject();
         System.out.println("PersistAd:"+heading+","+body+","+url);

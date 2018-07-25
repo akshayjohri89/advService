@@ -26,4 +26,12 @@ public class ServiceResource {
         return PersistAd.send(id, heading, body, url, "0");
         //return new AdText(11l, "Dummy Ad", "Random Ad body", "www.bing.com");
     }
+
+    @GET
+    @Timed
+    @Path("registerClick")
+    public String registerClick(@QueryParam("AdId") String id) {
+        System.out.println("Registering click for "+id);
+        return PersistAd.addClick(id);
+    }
 }
