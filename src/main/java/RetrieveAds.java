@@ -78,7 +78,7 @@ public class RetrieveAds {
                 JSONArray tokenList = result.getJSONArray("result");
 
 
-                for (int index=0;index<=tokenList.length();index++) {
+                for (int index=0;index<tokenList.length();index++) {
 //                    try {
                         JSONObject ob = tokenList.getJSONObject(index);
                         String data = ob.getString("data");
