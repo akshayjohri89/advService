@@ -92,7 +92,7 @@ public class RetrieveAds {
                         JSONObject returnJson = new JSONObject(output.toString());
                         returnJson.put("key",ob.getString("key"));
 //                        toReturn.add(returnJson.toString());
-                        toReturn.put(ob.getString("key"),returnJson);
+                        toReturn.put(index,returnJson);
                     } catch (JSONException e) {
                     }
                 }
