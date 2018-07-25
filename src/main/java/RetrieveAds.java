@@ -39,8 +39,8 @@ public class RetrieveAds {
         return invokeRPC(id,method,params,"adchain1");
     }
 
-    public static List<String> invokeRPC (String id, String method, List<Object> params, String chainName){
-        List<String> toReturn = new ArrayList<String>();
+    public static JSONArray invokeRPC (String id, String method, List<Object> params, String chainName){
+        JSONArray toReturn = new JSONArray();
         HttpClient httpClient = HttpClientBuilder.create().build();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", id);
@@ -79,7 +79,7 @@ public class RetrieveAds {
 
 
                 for (int index=0;index<tokenList.length();index++) {
-//                    try {
+                    try {
                         JSONObject ob = tokenList.getJSONObject(index);
                         String data = ob.getString("data");
 
@@ -89,11 +89,12 @@ public class RetrieveAds {
                             output.append((char)Integer.parseInt(str, 16));
                         }
                         System.out.println("AllAds:Data:"+output.toString());
-                        JSONObject returnJson = new JSONObject(output.toString().trim());
+                        JSONObject returnJson = new JSONObject(output.toString());
                         returnJson.put("key",ob.getString("key"));
-                        toReturn.add(returnJson.toString());
-//                    } catch (JSONException e) {
-//                    }
+//                        toReturn.add(returnJson.toString());
+                        toReturn.put(ob.getString("key"),returnJson);
+                    } catch (JSONException e) {
+                    }
                 }
 //                    toReturn = oj.getString("data");
 //                    return output.toString();

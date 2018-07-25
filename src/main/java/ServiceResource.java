@@ -1,6 +1,7 @@
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.base.Optional;
 import net.minidev.json.JSONObject;
+import org.json.JSONArray;
 import org.json.JSONException;
 
 import javax.ws.rs.GET;
@@ -38,7 +39,7 @@ public class ServiceResource {
     @GET
     @Timed
     @Path("allAds")
-    public List<String> getAllAds() {
+    public JSONArray getAllAds() {
         return RetrieveAds.send();
     }
 }
