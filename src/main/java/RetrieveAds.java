@@ -31,7 +31,7 @@ import java.util.Random;
 public class RetrieveAds {
 
 
-    public static List<String> send() {
+    public static JSONArray send() {
         String method = "liststreamitems";
         String id = "1";
         List<Object> params = new ArrayList<Object>();
