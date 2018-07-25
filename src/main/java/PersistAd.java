@@ -37,7 +37,6 @@ public class PersistAd {
         String hex = toHex(jsonObject.toString());
 
         String method = "publish";
-        String id = "1";
         List<Object> params = new ArrayList<Object>();
         params.add("adstream1");
         Long uuid = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
