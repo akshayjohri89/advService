@@ -65,14 +65,14 @@ public class PersistAd {
         try {
             CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
             credentialsProvider.setCredentials(
-                    new AuthScope("localhost", 4357),
+                    new AuthScope("localhost", 4356),
                     new UsernamePasswordCredentials("multichainrpc", "Apb8LDVcPtsCqBeDKBVCtpNRx4GnCPpK2fBJ2eE1S8uK")
             );
 
             StringEntity myEntity = new StringEntity(jsonObject.toString());
 
             HttpPost httpPost = new
-                    HttpPost("http://multichainrpc:Apb8LDVcPtsCqBeDKBVCtpNRx4GnCPpK2fBJ2eE1S8uK@localhost:4357");       //HttpPost("http://multichainrpc:EZikv3MtoKA2yjrG6T7eTkPZMXntwr9k1ft7ja3jLLaA@192.168.1.6:9732");
+                    HttpPost("http://multichainrpc:Apb8LDVcPtsCqBeDKBVCtpNRx4GnCPpK2fBJ2eE1S8uK@localhost:4356");       //HttpPost("http://multichainrpc:EZikv3MtoKA2yjrG6T7eTkPZMXntwr9k1ft7ja3jLLaA@192.168.1.6:9732");
             httpPost.setEntity(myEntity);
 
             HttpResponse httpResponse = httpClient.execute(httpPost);
