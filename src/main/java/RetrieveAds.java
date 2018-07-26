@@ -116,6 +116,7 @@ public class RetrieveAds {
         JSONObject returnJson = null,oj =null;
         HttpClient httpClient = HttpClientBuilder.create().build();
         JSONObject jsonObject = new JSONObject();
+        String id = "1";
         jsonObject.put("id", id);
         jsonObject.put("method", method);
         if (params != null && params.size() != 0) {

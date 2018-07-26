@@ -1,8 +1,8 @@
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.base.Optional;
-import net.minidev.json.JSONObject;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -33,17 +33,21 @@ public class ServiceResource {
     @Timed
     @Path("registerClick")
     public String registerClick(@QueryParam("AdId") String key) {
-        System.out.println("Registering click for "+id);
+        System.out.println("Registering click for "+key);
         JSONObject jsonObject = (JSONObject) RetrieveAds.getAd(key);
-        Integer clicks = Integer.parseInt(jsonObject.get("clicks"))+1;
-        return PersistAd.addClick(key, jsonObject.get("id"), jsonObject.get("heading"), jsonObject.get("body"),
-                jsonObject.get("url"), jsonObject.get("score"), clicks.toString());
+        Integer clicks = Integer.parseInt(jsonObject.get("clicks").toString())+1;
+        return PersistAd.addClick(key, jsonObject.get("id").toString(),
+                jsonObject.get("heading").toString(),
+                jsonObject.get("body").toString(),
+                jsonObject.get("url").toString(),
+                jsonObject.get("score").toString(),
+                clicks.toString());
     }
 
     @GET
     @Timed
     @Path("allAds")
     public String getAllAds() {
-        return RetrieveAds.send();
+        return RetrieveAds.getAll();
     }
 }
