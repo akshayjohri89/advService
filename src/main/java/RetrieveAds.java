@@ -29,7 +29,8 @@ import java.util.Random;
  * Created by akjohri on 7/25/2018.
  */
 public class RetrieveAds {
-
+    private static final String rpcUser = "multichainrpc";
+    private static final String rpcPassword = "Apb8LDVcPtsCqBeDKBVCtpNRx4GnCPpK2fBJ2eE1S8uK";
 
     public static String getAll() {
         String method = "liststreamitems";
@@ -54,13 +55,13 @@ public class RetrieveAds {
             CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
             credentialsProvider.setCredentials(
                     new AuthScope("localhost", 4356),
-                    new UsernamePasswordCredentials("multichainrpc", "Apb8LDVcPtsCqBeDKBVCtpNRx4GnCPpK2fBJ2eE1S8uK")
+                    new UsernamePasswordCredentials(rpcUser, rpcPassword)
             );
 
             StringEntity myEntity = new StringEntity(jsonObject.toString());
 
             HttpPost httpPost = new
-                    HttpPost("http://multichainrpc:Apb8LDVcPtsCqBeDKBVCtpNRx4GnCPpK2fBJ2eE1S8uK@localhost:4356");       //HttpPost("http://multichainrpc:EZikv3MtoKA2yjrG6T7eTkPZMXntwr9k1ft7ja3jLLaA@192.168.1.6:9732");
+                    HttpPost("http://"+rpcUser+":"+rpcPassword+"@localhost:4356");
             httpPost.setEntity(myEntity);
             HttpResponse httpResponse = httpClient.execute(httpPost);
             HttpEntity httpEntity = httpResponse.getEntity();
@@ -128,13 +129,13 @@ public class RetrieveAds {
             CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
             credentialsProvider.setCredentials(
                     new AuthScope("localhost", 4356),
-                    new UsernamePasswordCredentials("multichainrpc", "3WsnHdSsUFgp3umeQbd3Hd3mrvNbQQpPoPTs285Up8eV")
+                    new UsernamePasswordCredentials(rpcUser, rpcPassword)
             );
 
             StringEntity myEntity = new StringEntity(jsonObject.toString());
 
             HttpPost httpPost = new
-                    HttpPost("http://multichainrpc:3WsnHdSsUFgp3umeQbd3Hd3mrvNbQQpPoPTs285Up8eV@localhost:4356");       //HttpPost("http://multichainrpc:EZikv3MtoKA2yjrG6T7eTkPZMXntwr9k1ft7ja3jLLaA@192.168.1.6:9732");
+                    HttpPost("http://"+rpcUser+":"+rpcPassword+"@localhost:4356");       //HttpPost("http://multichainrpc:EZikv3MtoKA2yjrG6T7eTkPZMXntwr9k1ft7ja3jLLaA@192.168.1.6:9732");
             httpPost.setEntity(myEntity);
 
             HttpResponse httpResponse = httpClient.execute(httpPost);
