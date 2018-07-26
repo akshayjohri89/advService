@@ -106,12 +106,10 @@ public class RetrieveAds {
     }
 
     public static JSONObject getAd(String key) {
-        String method = "liststreamitems";
+        String method = "liststreamkeyitems";
         List<Object> params = new ArrayList<Object>();
         params.add("adstream1");
         params.add(key);
-        params.add("false");
-        params.add("1");
         return rpcGetAd(method,params,"adchain1");
     }
 
