@@ -35,7 +35,12 @@ public class ServiceResource {
     public String registerClick(@QueryParam("AdId") String key) {
         System.out.println("Registering click for "+key);
         JSONObject jsonObject = (JSONObject) RetrieveAds.getAd(key);
-        Integer clicks = Integer.parseInt(jsonObject.get("clicks").toString())+1;
+        Integer clicks = null;
+        try {
+            clicks = Integer.parseInt(jsonObject.get("clicks").toString())+1;
+        } catch (JSONException ex) {
+            clicks = new Integer(1);
+        }
         return PersistAd.addClick(key, jsonObject.get("id").toString(),
                 jsonObject.get("heading").toString(),
                 jsonObject.get("body").toString(),
