@@ -31,15 +31,15 @@ import java.util.Random;
 public class RetrieveAds {
 
 
-    public static String send() {
+    public static String getAll() {
         String method = "liststreamitems";
         String id = "1";
         List<Object> params = new ArrayList<Object>();
         params.add("adstream1");
-        return invokeRPC(id,method,params,"adchain1");
+        return rpcGetAll(id,method,params,"adchain1");
     }
 
-    public static String invokeRPC (String id, String method, List<Object> params, String chainName){
+    public static String rpcGetAll (String id, String method, List<Object> params, String chainName){
         JSONObject toReturn = new JSONObject();
         HttpClient httpClient = HttpClientBuilder.create().build();
         JSONObject jsonObject = new JSONObject();
@@ -62,6 +62,79 @@ public class RetrieveAds {
             HttpPost httpPost = new
                     HttpPost("http://multichainrpc:Apb8LDVcPtsCqBeDKBVCtpNRx4GnCPpK2fBJ2eE1S8uK@localhost:4356");       //HttpPost("http://multichainrpc:EZikv3MtoKA2yjrG6T7eTkPZMXntwr9k1ft7ja3jLLaA@192.168.1.6:9732");
             httpPost.setEntity(myEntity);
+            HttpResponse httpResponse = httpClient.execute(httpPost);
+            HttpEntity httpEntity = httpResponse.getEntity();
+
+            System.out.println("------------------");
+            System.out.println(httpResponse.getStatusLine());
+
+            if (httpEntity != null) {
+                System.out.println("Response content length: " + httpEntity.getContentLength());
+                String retSrc = EntityUtils.toString(httpEntity);
+                JSONObject result = new JSONObject(retSrc); //Convert String to JSON Object
+                JSONArray tokenList = result.getJSONArray("result");
+                for (int index=0;index<tokenList.length();index++) {
+                    try {
+                        JSONObject ob = tokenList.getJSONObject(index);
+                        String data = ob.getString("data");
+
+                        StringBuilder output = new StringBuilder();
+                        for (int i = 0; i < data.length(); i+=2) {
+                            String str = data.substring(i, i+2);
+                            output.append((char)Integer.parseInt(str, 16));
+                        }
+                        System.out.println("AllAds:Data:"+output.toString());
+                        JSONObject returnJson = new JSONObject(output.toString());
+                        returnJson.put("key",ob.getString("key"));
+                        toReturn.put(ob.getString("key"),returnJson);
+                    } catch (JSONException e) {
+                    }
+                }
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            httpClient.getConnectionManager().shutdown();
+        }
+
+        return toReturn.toString();
+    }
+
+    public static JSONObject getAd(String key) {
+        String method = "liststreamitems";
+        List<Object> params = new ArrayList<Object>();
+        params.add("adstream1");
+        params.add(key);
+        return rpcGetAd(method,params,"adchain1");
+    }
+
+    public static JSONObject rpcGetAd (String method, List< Object > params, String chainName){
+        JSONObject returnJson = null,oj =null;
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", id);
+        jsonObject.put("method", method);
+        if (params != null && params.size() != 0) {
+            jsonObject.put("params", params);
+        }
+        jsonObject.put("chain_name", chainName);
+        JSONObject responseJSONObject = new JSONObject();
+        try {
+            CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+            credentialsProvider.setCredentials(
+                    new AuthScope("localhost", 4356),
+                    new UsernamePasswordCredentials("multichainrpc", "3WsnHdSsUFgp3umeQbd3Hd3mrvNbQQpPoPTs285Up8eV")
+            );
+
+            StringEntity myEntity = new StringEntity(jsonObject.toString());
+
+            HttpPost httpPost = new
+                    HttpPost("http://multichainrpc:3WsnHdSsUFgp3umeQbd3Hd3mrvNbQQpPoPTs285Up8eV@localhost:4356");       //HttpPost("http://multichainrpc:EZikv3MtoKA2yjrG6T7eTkPZMXntwr9k1ft7ja3jLLaA@192.168.1.6:9732");
+            httpPost.setEntity(myEntity);
 
             HttpResponse httpResponse = httpClient.execute(httpPost);
             HttpEntity httpEntity = httpResponse.getEntity();
@@ -77,27 +150,18 @@ public class RetrieveAds {
 
                 JSONArray tokenList = result.getJSONArray("result");
 
-
-                for (int index=0;index<tokenList.length();index++) {
-                    try {
-                        JSONObject ob = tokenList.getJSONObject(index);
-                        String data = ob.getString("data");
-
-                        StringBuilder output = new StringBuilder();
-                        for (int i = 0; i < data.length(); i+=2) {
-                            String str = data.substring(i, i+2);
-                            output.append((char)Integer.parseInt(str, 16));
-                        }
-                        System.out.println("AllAds:Data:"+output.toString());
-                        JSONObject returnJson = new JSONObject(output.toString());
-                        returnJson.put("key",ob.getString("key"));
-//                        toReturn.add(returnJson.toString());
-                        toReturn.put(ob.getString("key"),returnJson);
-                    } catch (JSONException e) {
-                    }
+//                int index = (int)(Math.random()*tokenList.length());
+                oj = tokenList.getJSONObject(0);
+                System.out.println("oj:"+oj);
+                String data = oj.getString("data");
+                StringBuilder output = new StringBuilder();
+                for (int i = 0; i < data.length(); i+=2) {
+                    String str = data.substring(i, i+2);
+                    output.append((char)Integer.parseInt(str, 16));
                 }
-//                    toReturn = oj.getString("data");
-//                    return output.toString();
+                System.out.println("original Object:"+output.toString().trim());
+                returnJson = new JSONObject(output.toString().trim());
+                return returnJson;
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -108,7 +172,7 @@ public class RetrieveAds {
         } finally {
             httpClient.getConnectionManager().shutdown();
         }
-
-        return toReturn.toString();
+        return returnJson;
     }
+
 }

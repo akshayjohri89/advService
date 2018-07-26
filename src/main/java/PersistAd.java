@@ -26,14 +26,26 @@ import java.util.UUID;
  */
 public class PersistAd {
 
-    public static String addClick(String id) {
+    public static String addClick(String key, String id, String heading, String body, String url, String score, String clicks) {
         //Retrieve Clicks
         //Update Clicks
-        System.out.println("addClick: Not doing anything");
-        return "";
+        JSONObject jsonObject = new JSONObject();
+        System.out.println("AddClicks:"+heading+","+body+","+url+","+score+","+clicks);
+        jsonObject.put("id", id);
+        jsonObject.put("heading", heading);
+        jsonObject.put("body", body);
+        jsonObject.put("url", url);
+        jsonObject.put("score", score);
+        jsonObject.put("clicks", clicks);
+        String hex = toHex(jsonObject.toString());
+
+        String method = "publish";
+        List<Object> params = new ArrayList<Object>();
+        params.add("adstream1");
+        params.add(key);
+        params.add(hex);
+        return invokeRPC(id,method,params,"adchain1");
     }
-
-
 
     public static String send(String id, String heading, String body, String url, String score) {
         JSONObject jsonObject = new JSONObject();
@@ -43,7 +55,6 @@ public class PersistAd {
         jsonObject.put("body", body);
         jsonObject.put("url", url);
         jsonObject.put("score", score);
-
         String hex = toHex(jsonObject.toString());
 
         String method = "publish";

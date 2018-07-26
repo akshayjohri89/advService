@@ -25,15 +25,19 @@ public class ServiceResource {
     public String createAd(@QueryParam("AdId") String id, @QueryParam("heading") String heading, @QueryParam("body") String body, @QueryParam("url") String url) {
         System.out.println("stage1");
         return PersistAd.send(id, heading, body, url, "0");
+
         //return new AdText(11l, "Dummy Ad", "Random Ad body", "www.bing.com");
     }
 
     @GET
     @Timed
     @Path("registerClick")
-    public String registerClick(@QueryParam("AdId") String id) {
+    public String registerClick(@QueryParam("AdId") String key) {
         System.out.println("Registering click for "+id);
-        return PersistAd.addClick(id);
+        JSONObject jsonObject = (JSONObject) RetrieveAds.getAd(key);
+        Integer clicks = Integer.parseInt(jsonObject.get("clicks"))+1;
+        return PersistAd.addClick(key, jsonObject.get("id"), jsonObject.get("heading"), jsonObject.get("body"),
+                jsonObject.get("url"), jsonObject.get("score"), clicks.toString());
     }
 
     @GET
