@@ -31,7 +31,6 @@ public class PersistAd {
         //Update Clicks
         JSONObject jsonObject = new JSONObject();
         System.out.println("AddClicks:"+heading+","+body+","+url+","+score+","+clicks);
-        jsonObject.put("id", "1");
         jsonObject.put("heading", heading);
         jsonObject.put("body", body);
         jsonObject.put("url", url);
@@ -44,7 +43,7 @@ public class PersistAd {
         params.add("adstream1");
         params.add(key);
         params.add(hex);
-        return invokeRPC(id,method,params,"adchain1");
+        return invokeRPC("1",method,params,"adchain1");
     }
 
     public static String send(String id, String heading, String body, String url, String score) {
