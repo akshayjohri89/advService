@@ -41,7 +41,7 @@ public class ServiceResource {
         } catch (JSONException ex) {
             clicks = new Integer(1);
         }
-        return PersistAd.addClick(key, jsonObject.get("id").toString(),
+        return PersistAd.addClick(key,
                 jsonObject.get("heading").toString(),
                 jsonObject.get("body").toString(),
                 jsonObject.get("url").toString(),

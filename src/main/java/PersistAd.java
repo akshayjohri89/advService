@@ -26,12 +26,12 @@ import java.util.UUID;
  */
 public class PersistAd {
 
-    public static String addClick(String key, String id, String heading, String body, String url, String score, String clicks) {
+    public static String addClick(String key, String heading, String body, String url, String score, String clicks) {
         //Retrieve Clicks
         //Update Clicks
         JSONObject jsonObject = new JSONObject();
         System.out.println("AddClicks:"+heading+","+body+","+url+","+score+","+clicks);
-        jsonObject.put("id", id);
+        jsonObject.put("id", "1");
         jsonObject.put("heading", heading);
         jsonObject.put("body", body);
         jsonObject.put("url", url);
