@@ -42,7 +42,7 @@ public class RetrieveAds {
         List<String> keys = rpcGetAllKeys(id,method,params,"adchain1");
         JSONObject toReturn = new JSONObject();
         for (String key: keys) {
-            toReturn.put(key,rpcGetAd(key));
+            toReturn.put(key,getAd(key));
         }
         return toReturn.toString();
     }
