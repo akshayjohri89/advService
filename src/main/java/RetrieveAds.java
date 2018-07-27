@@ -78,6 +78,7 @@ public class RetrieveAds {
             if (httpEntity != null) {
                 System.out.println("Response content length: " + httpEntity.getContentLength());
                 String retSrc = EntityUtils.toString(httpEntity);
+                System.out.println(retSrc);
                 JSONObject result = new JSONObject(retSrc); //Convert String to JSON Object
                 JSONArray tokenList = result.getJSONArray("result");
                 for (int index=0;index<tokenList.length();index++) {
