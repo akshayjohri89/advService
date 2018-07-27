@@ -139,6 +139,45 @@ public class ServiceResource {
 
     @GET
     @Timed
+    @Path("getAdDetails")
+    public AdText getAdDetails(@QueryParam("AdId") String key) {
+        JSONObject jsonObject = (JSONObject) RetrieveAds.getAd(key);
+        Integer clicks = null,imps=null;
+        try {
+            clicks = Integer.parseInt(jsonObject.get("clicks").toString());
+        } catch (JSONException ex) {
+            clicks = new Integer(0);
+        }
+        try {
+            imps = Integer.parseInt(jsonObject.get("imps").toString());
+        } catch (JSONException ex) {
+            imps = new Integer(0);
+        }
+        String advertiser ="";
+        try {
+            advertiser = jsonObject.get("advertiser").toString();
+        } catch (JSONException ex) {
+        }
+        Integer score = null;
+        try {
+            score = Integer.parseInt(jsonObject.get("score").toString());
+        } catch (JSONException ex) {
+            score = new Integer(0);
+        }
+        AdText toReturn = new AdText("1",
+                advertiser,
+                jsonObject.get("heading").toString(),
+                jsonObject.get("body").toString(),
+                jsonObject.get("url").toString(),
+                key);
+        toReturn.setClicks(clicks.toString());
+        toReturn.setImps(imps.toString());
+        toReturn.setScore(score.toString());
+        return toReturn
+    }
+
+    @GET
+    @Timed
     @Path("allAds")
     public String getAllAds() {
         return RetrieveAds.getAll();
