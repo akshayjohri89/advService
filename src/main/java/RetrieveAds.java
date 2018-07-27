@@ -33,15 +33,22 @@ public class RetrieveAds {
     private static final String rpcPassword = "Apb8LDVcPtsCqBeDKBVCtpNRx4GnCPpK2fBJ2eE1S8uK";
 
     public static String getAll() {
-        String method = "liststreamitems";
+        String method = "liststreamkeys";
         String id = "1";
         List<Object> params = new ArrayList<Object>();
         params.add("adstream1");
-        return rpcGetAll(id,method,params,"adchain1");
+        params.add(false);
+        params.add(999999);
+        List<String> keys = rpcGetAllKeys(id,method,params,"adchain1");
+        JSONObject toReturn = new JSONObject();
+        foreach (String key : keys.) {
+            toReturn.put(key,rpcGetAd(key));
+        }
+        return toReturn.toString();
     }
 
-    public static String rpcGetAll (String id, String method, List<Object> params, String chainName){
-        JSONObject toReturn = new JSONObject();
+    public static List<String> rpcGetAllKeys (String id, String method, List<Object> params, String chainName){
+        List<String> toReturn = new ArrayList<String>();
         HttpClient httpClient = HttpClientBuilder.create().build();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", id);
@@ -77,17 +84,18 @@ public class RetrieveAds {
                 for (int index=0;index<tokenList.length();index++) {
                     try {
                         JSONObject ob = tokenList.getJSONObject(index);
-                        String data = ob.getString("data");
-
-                        StringBuilder output = new StringBuilder();
-                        for (int i = 0; i < data.length(); i+=2) {
-                            String str = data.substring(i, i+2);
-                            output.append((char)Integer.parseInt(str, 16));
-                        }
-                        System.out.println("AllAds:Data:"+output.toString());
-                        JSONObject returnJson = new JSONObject(output.toString());
-                        returnJson.put("key",ob.getString("key"));
-                        toReturn.put(ob.getString("key"),returnJson);
+//                        String data = ob.getString("data");
+//
+//                        StringBuilder output = new StringBuilder();
+//                        for (int i = 0; i < data.length(); i+=2) {
+//                            String str = data.substring(i, i+2);
+//                            output.append((char)Integer.parseInt(str, 16));
+//                        }
+//                        System.out.println("AllAds:Data:"+output.toString());
+//                        JSONObject returnJson = new JSONObject(output.toString());
+//                        returnJson.put("key",ob.getString("key"));
+//                        toReturn.put(ob.getString("key"),returnJson);
+                        toReturn.add(ob.getString("key"));
                     } catch (JSONException e) {
                     }
                 }
@@ -102,7 +110,7 @@ public class RetrieveAds {
             httpClient.getConnectionManager().shutdown();
         }
 
-        return toReturn.toString();
+        return toReturn;
     }
 
     public static JSONObject getAd(String key) {
