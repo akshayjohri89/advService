@@ -140,6 +140,7 @@ public class ServiceResource {
     @GET
     @Timed
     @Path("getAdDetails")
+    @Produces(MediaType.APPLICATION_JSON)
     public AdText getAdDetails(@QueryParam("AdId") String key) {
         JSONObject jsonObject = (JSONObject) RetrieveAds.getAd(key);
         Integer clicks = null,imps=null;
