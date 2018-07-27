@@ -164,7 +164,7 @@ public class ServiceResource {
         } catch (JSONException ex) {
             score = new Integer(0);
         }
-        AdText toReturn = new AdText("1",
+        AdText toReturn = new AdText(1,
                 advertiser,
                 jsonObject.get("heading").toString(),
                 jsonObject.get("body").toString(),
