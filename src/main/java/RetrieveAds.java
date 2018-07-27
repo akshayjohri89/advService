@@ -37,7 +37,6 @@ public class RetrieveAds {
         String id = "1";
         List<Object> params = new ArrayList<Object>();
         params.add("adstream1");
-        params.add(false);
         List<String> keys = rpcGetAllKeys(id,method,params,"adchain1");
         JSONObject toReturn = new JSONObject();
         for (String key: keys) {
