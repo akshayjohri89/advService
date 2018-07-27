@@ -38,6 +38,7 @@ public class RetrieveAds {
         List<Object> params = new ArrayList<Object>();
         params.add("adstream1");
         List<String> keys = rpcGetAllKeys(id,method,params,"adchain1");
+        System.out.println("getAll:Keys:"+keys);
         JSONObject toReturn = new JSONObject();
         for (String key: keys) {
             toReturn.put(key,getAd(key));
@@ -77,7 +78,7 @@ public class RetrieveAds {
             if (httpEntity != null) {
                 System.out.println("Response content length: " + httpEntity.getContentLength());
                 String retSrc = EntityUtils.toString(httpEntity);
-                System.out.println(retSrc);
+                System.out.println("rpcGetAllKeys:"+retSrc);
                 JSONObject result = new JSONObject(retSrc); //Convert String to JSON Object
                 JSONArray tokenList = result.getJSONArray("result");
                 for (int index=0;index<tokenList.length();index++) {
