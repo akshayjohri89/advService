@@ -173,7 +173,7 @@ public class ServiceResource {
         toReturn.setClicks(clicks.toString());
         toReturn.setImps(imps.toString());
         toReturn.setScore(score.toString());
-        return toReturn
+        return toReturn;
     }
 
     @GET
