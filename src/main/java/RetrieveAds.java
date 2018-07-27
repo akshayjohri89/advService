@@ -171,8 +171,14 @@ public class RetrieveAds {
                     String str = data.substring(i, i+2);
                     output.append((char)Integer.parseInt(str, 16));
                 }
+
+//                        returnJson.put("key",ob.getString("key"));
+//                        toReturn.put(ob.getString("key"),returnJson);
+
+
                 System.out.println("original Object:"+output.toString().trim());
                 returnJson = new JSONObject(output.toString().trim());
+                returnJson.put("key",oj.getString("key"));
                 return returnJson;
             }
         } catch (UnsupportedEncodingException e) {
