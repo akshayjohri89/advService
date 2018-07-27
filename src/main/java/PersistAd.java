@@ -25,7 +25,7 @@ import java.util.UUID;
  * Created by akjohri on 8/1/2017.
  */
 public class PersistAd {
-
+    private static final String stream = "adstream2";
     public static String addClickImp(String key, String advertiser, String heading, String body, String url, String score, String clicks, String imps) {
         //Retrieve Clicks
         //Update Clicks
@@ -42,7 +42,7 @@ public class PersistAd {
 
         String method = "publish";
         List<Object> params = new ArrayList<Object>();
-        params.add("adstream1");
+        params.add(stream);
         params.add(key);
         params.add(hex);
         return invokeRPC("1",method,params,"adchain1");
@@ -61,7 +61,7 @@ public class PersistAd {
 
         String method = "publish";
         List<Object> params = new ArrayList<Object>();
-        params.add("adstream1");
+        params.add(stream);
         Long uuid = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         params.add(uuid.toString());
         params.add(hex);

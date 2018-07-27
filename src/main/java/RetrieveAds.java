@@ -31,12 +31,13 @@ import java.util.Random;
 public class RetrieveAds {
     private static final String rpcUser = "multichainrpc";
     private static final String rpcPassword = "Apb8LDVcPtsCqBeDKBVCtpNRx4GnCPpK2fBJ2eE1S8uK";
+    private static final String stream = "adstream2";
 
     public static String getAll() {
         String method = "liststreamkeys";
         String id = "1";
         List<Object> params = new ArrayList<Object>();
-        params.add("adstream1");
+        params.add(stream);
         List<String> keys = rpcGetAllKeys(id,method,params,"adchain1");
         System.out.println("getAll:Keys:"+keys);
         JSONObject toReturn = new JSONObject();
@@ -116,7 +117,7 @@ public class RetrieveAds {
     public static JSONObject getAd(String key) {
         String method = "liststreamkeyitems";
         List<Object> params = new ArrayList<Object>();
-        params.add("adstream1");
+        params.add(stream);
         params.add(key);
         params.add(false);
         params.add(1);
