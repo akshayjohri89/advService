@@ -110,6 +110,8 @@ public class RetrieveAds {
         List<Object> params = new ArrayList<Object>();
         params.add("adstream1");
         params.add(key);
+        params.add("false");
+        params.add("1");
         return rpcGetAd(method,params,"adchain1");
     }
 
